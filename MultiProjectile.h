@@ -26,21 +26,37 @@ public:
 	void addProjectile(bool upinput, float x, float y, float speed)
 	{
 		//cout << "size of projectiles " << multiprojectile.size() << endl;
-		if(multiprojectile.empty())
-		{
 			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
 			multiprojectile.push_back(projectile);
-		}
-		else if(multiprojectile.at(multiprojectile.size() - 1)->getcornerY() >= 1)
+	}
+
+	float projectileX(int a)
+	{
+		return multiprojectile.at(a)->getcornerX();
+	}
+
+	float projectileY(int a)
+	{
+		return multiprojectile.at(a)->getcornerY();
+	}
+
+	float poslastprojectile()
+	{
+		if(multiprojectile.size() != 0)
 		{
-			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
-			multiprojectile.push_back(projectile);
+			return multiprojectile.back()->getcornerY();
 		}
+		return -10;
 	}
 
 	int getsize()
 	{
 		return multiprojectile.size();
+	}
+
+	void setnotmoving(int a)
+	{
+		multiprojectile.at(a)->setnotmoving();
 	}
 
 	void draw()

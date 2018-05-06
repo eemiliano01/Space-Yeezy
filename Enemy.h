@@ -70,6 +70,12 @@ public:
 		return height;
 	}
 
+	void setdeath()
+	{
+		alive = false;
+		fading = true;
+	}
+
 	void setmovement(bool l, bool r, bool d)
 	{
 		left = l;
@@ -115,12 +121,13 @@ public:
 		}
 	}
 
-	void contains(float x, float y)
+	bool contains(float x, float y)
 	{
 		if(enemy->contains(x,y) && alive == true)
 		{
 			alive = false;
 			fading = true;
+			return true;
 		}
 	}
 

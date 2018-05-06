@@ -43,6 +43,11 @@ public:
 		}
 	}
 
+	void setnotmoving()
+	{
+		moving = false;
+	}
+
 	void setSpeed(float speed)
 	{
 		moverate = speed;

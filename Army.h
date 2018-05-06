@@ -62,6 +62,19 @@ public:
 		}
 	}
 
+	bool contains(float x, float y)
+	{
+		for(int i = 0; i < enemies.size(); i++)
+		{
+			if(enemies.at(i)->contains(x,y))
+			{
+				enemies.at(i)->setdeath();
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void draw()
 	{
 		for(int i = 0; i < num_enemies; i++)

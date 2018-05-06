@@ -12,6 +12,13 @@ void app_timer(int value)
 	}
 	else
 	{
+		for(int i = 0; i < singleton->projectiles->getsize(); i++)
+		{
+			if(singleton->army->contains(singleton->projectiles->projectileX(i),singleton->projectiles->projectileY(i)))
+			{
+				singleton->projectiles->setnotmoving(i);
+			}
+		}
 		singleton->redraw();
 		glutTimerFunc(16, app_timer, value);
 	}    
@@ -38,16 +45,16 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 
 void App::specialKeyPress(int key)
 {
-	if (!game_over)
+	if(!game_over)
 	{
 		if(key == 101)
 		{
-			projectiles->addProjectile(true,playerone->getcornerX()+0.01, playerone->getcornerY()-0.01, 0.05);
+			if(projectiles->poslastprojectile() >= 0 || projectiles->poslastprojectile() == -10)
+			{
+				projectiles->addProjectile(true,playerone->getcornerX()+0.01, playerone->getcornerY()-0.01, 0.1);
+			}
 		}
-		else
-		{
-			playerone->keydown(key);
-		}
+		playerone->keydown(key);
 	}
 }
 

@@ -12,7 +12,7 @@ class Player
 	bool fading;
 	bool left;
 	bool right;
-	bool shoot;
+	bool shooting;
 	int rows;
 	int cols;
 	int count;
@@ -34,7 +34,7 @@ public:
 		count = 1;
 		left = false;
 		right = false;
-		shoot = false;
+		shooting = false;
 		cornerX = x;
 		cornerY = y;
 		width = w;
@@ -59,6 +59,17 @@ public:
 		if(key == 100)
 		{
 			left = true;
+		}
+		else if(key == 101)
+		{
+			if(shooting == false)
+			{
+				shooting = true;
+			}
+			else if(shooting == true)
+			{
+				shooting = false;
+			}
 		}
 		else if(key == 102)
 		{
@@ -115,6 +126,11 @@ public:
 		}
 	}
 
+	bool getshooting()
+	{
+		return shooting;
+	}
+	
 	~Player()
 	{
 
