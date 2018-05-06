@@ -16,7 +16,7 @@ class Projectile
 	TexRect* projectile;
 
 public:
-	Projectile(const char* filename, float x, float y, float w, float h, bool up, bool moving)
+	Projectile(const char* filename, float x, float y, float w, float h, float speed, bool up, bool moving)
 	{
 		projectile = new TexRect(filename, x, y, w, h);
 		up = up;
@@ -26,7 +26,26 @@ public:
 		width = w;
 		height = h;
 		this->moving = moving;
-		moverate = 0.05;
+		moverate = speed;
+	}
+
+	void setDirection(bool upinput)
+	{
+		if(input)
+		{
+			up = true;
+			down = false;
+		}
+		else
+		{
+			up = false;
+			down = true;
+		}
+	}
+
+	void setSpeed(float speed)
+	{
+		moverate = speed;
 	}
 
 	float getcornerX()
