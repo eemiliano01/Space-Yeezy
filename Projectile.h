@@ -31,7 +31,7 @@ public:
 
 	void setDirection(bool upinput)
 	{
-		if(input)
+		if(upinput)
 		{
 			up = true;
 			down = false;

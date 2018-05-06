@@ -6,7 +6,7 @@
 #include "AnimatedRect.h"
 #include "Army.h"
 #include "Player.h"
-#include "Projectile.h"
+#include "MultiProjectile.h"
 #include <vector>
 
 using namespace std;
@@ -37,6 +37,7 @@ public:
 	Army* army;
 	Player* playerone;
 	Player* playertwo;
+	MultiProjectile* projectiles;
 
 	TexRect* ball;
 

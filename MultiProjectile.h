@@ -15,14 +15,14 @@ class MultiProjectile
 	float height;
 
 public:
-	MultiProjectiles(const char* filename, float x, float y, float w, float h);
+	MultiProjectile(const char* filename, float x, float y, float w, float h)
 	{
-		projectile = new Projectile(filename,x,y,w,h,false,false);
+		projectile = new Projectile(filename,x,y,w,h,0.0,false,false);
 		width = w;
 		height = h;
 	}
 
-	void addProjectile(bool upinput, float speed);
+	void addProjectile(bool upinput, float speed)
 	{
 		projectile->setDirection(upinput);
 		projectile->setSpeed(speed);

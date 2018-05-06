@@ -28,6 +28,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	background = new TexRect("images/space_square.png", -1, 1, 2, 2);
 	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.9, .14, .20, 3, 8);
 	playerone = new Player("images/Kanye.png", " ", 3, 2, 0.5, -0.8, .15, .20);
+	projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
 
 	game_over = false;
 
@@ -39,7 +40,14 @@ void App::specialKeyPress(int key)
 {
 	if (!game_over)
 	{
-		playerone->keydown(key);
+		if(key == 101)
+		{
+			projectiles->addProjectile(true,0.05);
+		}
+		else
+		{
+			playerone->keydown(key);
+		}
 	}
 }
 
@@ -62,6 +70,7 @@ void App::draw()
 	glLoadIdentity();
 
 	background->draw();
+	projectiles->draw();
 	playerone->draw();
 	army->draw();
 
