@@ -53,6 +53,11 @@ void TexRect::moveRight(float rate)
 	x += rate;
 }
 
+float TexRect::getY()
+{
+	return y;
+}
+
 void TexRect::jump(){
     if(rising){
         y+=yinc;

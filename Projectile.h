@@ -62,14 +62,15 @@ public:
 	{
 		if(moving)
 		{
-			projectile->draw();
 			if(up)
 			{
+				projectile->draw();
 				cornerY += moverate;
 				projectile->moveUp(moverate);
 			}
 			else if(down)
 			{
+				projectile->draw();
 				cornerY -= moverate;
 				projectile->moveDown(moverate);
 			}

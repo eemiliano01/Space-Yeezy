@@ -25,8 +25,22 @@ public:
 
 	void addProjectile(bool upinput, float x, float y, float speed)
 	{
-		projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
-		multiprojectile.push_back(projectile);
+		//cout << "size of projectiles " << multiprojectile.size() << endl;
+		if(multiprojectile.empty())
+		{
+			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
+			multiprojectile.push_back(projectile);
+		}
+		else if(multiprojectile.at(multiprojectile.size() - 1)->getcornerY() >= 1)
+		{
+			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
+			multiprojectile.push_back(projectile);
+		}
+	}
+
+	int getsize()
+	{
+		return multiprojectile.size();
 	}
 
 	void draw()
@@ -35,13 +49,14 @@ public:
 		{
 			multiprojectile.at(i)->draw();
 		}
-		/*for(int i = 0; i < multiprojectile.size(); i++)
+		for(int i = 0; i < multiprojectile.size(); i++)
 		{
-			if(multiprojectile.front()->getcornerY() >= 0.99 || multiprojectile.front()->getcornerY() <= -0.99)
+			//cout << multiprojectile.front()->getcornerY() << endl;
+			if(multiprojectile.front()->getcornerY() - height >= 0.99 || multiprojectile.front()->getcornerY() <= -0.8)
 			{
 				multiprojectile.pop_front();
 			}
-		}*/
+		}
 	}
 
 };
