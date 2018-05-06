@@ -42,7 +42,7 @@ void App::specialKeyPress(int key)
 	{
 		if(key == 101)
 		{
-			projectiles->addProjectile(true,0.05);
+			projectiles->addProjectile(true,playerone->getcornerX()+0.01, playerone->getcornerY()-0.01, 0.05);
 		}
 		else
 		{
