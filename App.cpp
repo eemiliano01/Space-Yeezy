@@ -1,7 +1,7 @@
 #include "App.h"
 
 using namespace std;
-
+//comment
 static App* singleton;
 
 void app_timer(int value)
