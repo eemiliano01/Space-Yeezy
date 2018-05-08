@@ -4,6 +4,8 @@
 #include "TexRect.h"
 #include "AnimatedRect.h"
 #include "Projectile.h"
+#include "Yeezys.h"
+#include "Supreme.h"
 #include <deque>
 
 class Player
@@ -15,12 +17,13 @@ class Player
 	bool shooting;
 	int rows;
 	int cols;
-	int count;
+	int projectile_count;
 	float cornerX;
 	float cornerY;
 	float width;
 	float height;
 	float moverate;
+	float boost;
 	TexRect *player;
 	AnimatedRect *playerfade;
 
@@ -31,7 +34,7 @@ public:
 		playerfade = new AnimatedRect(filename2, rows, cols, x, y, w, h);
 		this->rows = rows;
 		this->cols = cols;
-		count = 1;
+		projectile_count = 0;
 		left = false;
 		right = false;
 		shooting = false;
@@ -41,7 +44,18 @@ public:
 		height = h;
 		alive = true;
 		fading = false;
-		moverate = 0.05;
+		moverate = 0.02;
+		boost = 0.0;
+	}
+
+	int getcount()
+	{
+		return projectile_count;
+	}
+
+	float getboost()
+	{
+		return boost;
 	}
 
 	float getcornerX()
@@ -52,6 +66,33 @@ public:
 	float getcornerY()
 	{
 		return cornerY;
+	}
+
+	bool pickedup(Yeezys* yeezy)
+	{
+		float x1, x2, y1, y2;
+		x1 = yeezy->getcornerX();
+		x2 = x1+yeezy->getwidth();
+		y1 = yeezy->getcornerY();
+		y2 = y1+yeezy->getheight();
+		if(player->contains(x1,y1) || player->contains(x1,y2) || player->contains(x2,y2) || player->contains(x1,y2))
+		{
+			moverate += 0.02;
+		}
+	}
+
+	bool pickedup(Supreme* supreme)
+	{
+		float x1, x2, y1, y2;
+		x1 = supreme->getcornerX();
+		x2 = x1+supreme->getwidth();
+		y1 = supreme->getcornerY();
+		y2 = y1+supreme->getheight();
+		if(player->contains(x1,y1) || player->contains(x1,y2) || player->contains(x2,y2) || player->contains(x1,y2))
+		{
+			boost += 0.02;
+			projectile_count++;
+		}
 	}
 
 	void keydown(int key)

@@ -14,8 +14,11 @@ class Enemy
 	bool right;
 	bool left;
 	bool down;
+	bool shot;
 	int rows;
 	int cols;
+	int shootnum;
+	int totalchance;
 	float cornerX;
 	float cornerY;
 	float width;
@@ -25,7 +28,7 @@ class Enemy
 	AnimatedRect *enemyfade;
 
 public:
-	Enemy(const char* filename1, const char* filename2, int rows, int cols, float x, float y, float w, float h)
+	Enemy(const char* filename1, const char* filename2, int rows, int cols, float x, float y, float w, float h, int snum, int tchance)
 	{
 		enemy = new TexRect(filename1, x, y, w, h);
 		enemyfade = new AnimatedRect(filename2, rows, cols, x, y, w, h);
@@ -37,7 +40,15 @@ public:
 		height = h;
 		alive = true;
 		fading = false;
-		moverate = 0.003;
+		shot = false;
+		shootnum = snum;
+		totalchance = tchance;
+		moverate = 0.001;
+	}
+
+	void setshotfalse()
+	{
+		shot = false;
 	}
 
 	float getcornerX()
@@ -82,9 +93,21 @@ public:
 		right = r;
 		down = d;
 	}
-
-	void move()
+	
+	void draw()
 	{
+		if(alive)
+		{
+			enemy->draw();
+		}
+		else if(fading)
+		{
+			enemyfade->draw();
+			if(enemyfade->done())
+			{
+				fading = false;
+			}
+		}
 		if(left)
 		{
 			cornerX -= moverate;
@@ -104,22 +127,6 @@ public:
 			enemyfade->moveDown(moverate);
 		}
 	}
-	
-	void draw()
-	{
-		if(alive)
-		{
-			enemy->draw();
-		}
-		else if(fading)
-		{
-			enemyfade->draw();
-			if(enemyfade->done())
-			{
-				fading = false;
-			}
-		}
-	}
 
 	bool contains(float x, float y)
 	{
@@ -133,10 +140,21 @@ public:
 
 	bool shoot()
 	{
-		srand(time(NULL));
-		int num;
-		num = rand() % 20 + 1;
-		return num == 5;
+		if(shot == false && alive == true)
+		{
+			srand(time(NULL));
+			int num;
+			num = rand() % totalchance + 1;
+			if(num == shootnum)
+			{
+				shot = true;
+			}
+			return num == 5;
+		}
+		else
+		{
+			return false;
+		}
 	}
 };
 

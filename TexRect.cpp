@@ -58,6 +58,16 @@ float TexRect::getY()
 	return y;
 }
 
+void TexRect::setY(float input)
+{
+	y = input;
+}
+
+void TexRect::setX(float input)
+{
+	x = input;
+}
+
 void TexRect::jump(){
     if(rising){
         y+=yinc;

@@ -2,24 +2,33 @@
 
 using namespace std;
 //comment
-static App* singleton;
+static App* game;
 
 void app_timer(int value)
 {
-	if(singleton->game_over)
+	srand(time(NULL));
+	int num = rand() % 5 + 1;
+	if(game->game_over)
 	{
 		//game is over
 	}
 	else
 	{
-		for(int i = 0; i < singleton->projectiles->getsize(); i++)
+		//check for player projectiles hitting enemy
+		for(int i = 0; i < game->p1_projectiles->getsize(); i++)
 		{
-			if(singleton->army->containsprojectile(singleton->projectiles->getprojectile(i)))
+			if(game->army->containsprojectile(game->p1_projectiles->getprojectile(i)))
 			{
-				singleton->projectiles->setnotmoving(i);
+				game->p1_projectiles->setnotmoving(i);
 			}
 		}
-		singleton->redraw();
+		if(num == 3)
+		{
+			game->enemy_projectiles->addRandomProjectile(false,0.05);
+		}
+		game->yeezys->pickedup(game->playerone->pickedup(game->yeezys));
+		game->supreme->pickedup(game->playerone->pickedup(game->supreme));
+		game->redraw();
 		glutTimerFunc(16, app_timer, value);
 	}
 }
@@ -28,14 +37,18 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 {
 	// Initialize state variables
     
-	singleton = this;
+	game = this;
 	mx = 0.0;
 	my = 0.0;
     
 	background = new TexRect("images/space_square.png", -1, 1, 2, 2);
-	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.9, .14, .20, 3, 8);
+	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 8);
 	playerone = new Player("images/Kanye.png", " ", 3, 2, 0.5, -0.8, .15, .20);
-	projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
+	p1_projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
+	p2_projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
+	enemy_projectiles = new MultiProjectile("images/thanos_gauntlet.png", 0.0, 0.0, 0.484, 0.640);
+	yeezys = new Yeezys("images/yeezys.png", 0.16, 0.09675);
+	supreme = new Supreme("images/supreme_powerup.png", 0.165, 0.145);
 
 	game_over = false;
 
@@ -49,9 +62,9 @@ void App::specialKeyPress(int key)
 	{
 		if(key == 101)
 		{
-			if(projectiles->getsize() == 0)
+			if(p1_projectiles->getsize() <= playerone->getcount())
 			{
-				projectiles->addProjectile(true, playerone->getcornerX() + 0.01, playerone->getcornerY() - 0.01, 0.1);
+				p1_projectiles->addProjectile(true, playerone->getcornerX() + 0.01, playerone->getcornerY() - 0.01, /*speed*/ 0.02+playerone->getboost());
 			}
 		}
 		else
@@ -80,9 +93,13 @@ void App::draw()
 	glLoadIdentity();
 
 	background->draw();
-	projectiles->draw();
+	p1_projectiles->draw();
+	p2_projectiles->draw();
+	enemy_projectiles->draw();
 	playerone->draw();
 	army->draw();
+	yeezys->draw();
+	supreme->draw();
 
 	// We have been drawing everything to the back buffer
 	// Swap the buffers to see the result of what we drew

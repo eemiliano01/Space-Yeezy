@@ -7,7 +7,12 @@
 #include "Army.h"
 #include "Player.h"
 #include "MultiProjectile.h"
+#include "Yeezys.h"
+#include "Supreme.h"
 #include <vector>
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -37,12 +42,11 @@ public:
 	Army* army;
 	Player* playerone;
 	Player* playertwo;
-	MultiProjectile* projectiles;
-
-	TexRect* ball;
-
-	TexRect* platform;
-
+	MultiProjectile* p1_projectiles;
+	MultiProjectile* p2_projectiles;
+	MultiProjectile* enemy_projectiles;
+	Yeezys* yeezys;
+	Supreme* supreme;
 	TexRect* background;
 
 	AnimatedRect* gameOver;

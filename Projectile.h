@@ -19,7 +19,7 @@ public:
 	Projectile(const char* filename, float x, float y, float w, float h, float speed, bool up, bool moving)
 	{
 		projectile = new TexRect(filename, x, y, w, h);
-		up = up;
+		this->up = up;
 		down = !up;
 		cornerX = x;
 		cornerY = y;

@@ -22,11 +22,12 @@ class Army
 	int cols;
 	int num_enemies;
 	int num_alive;
+	int shotcount;
 
 public:
 	Army(const char* filename1, const char* filename2, int anirows, int anicols, float x, float y, float w, float h, int rows, int cols)
 	{
-		troop = new Enemy(filename1,filename2,anirows,anicols,x,y,w,h);
+		troop = new Enemy(filename1,filename2,anirows,anicols,x,y,w,h,0,0);
 		top_left_X = x;
 		top_right_X = top_left_X + cols * w;
 		top_Y = y;
@@ -39,9 +40,10 @@ public:
 		Enemy* temp;
 		float setX = x;
 		float setY = y;
+		int tot = 3;
 		for(int i = 1; i <= num_enemies; i++)
 		{
-			temp = new Enemy(filename1,filename2,anirows,anicols,setX,setY,w,h);
+			temp = new Enemy(filename1,filename2,anirows,anicols,setX,setY,w,h,tot-2,tot);
 			if(i % cols == 0)
 			{
 				setX = x;
@@ -52,6 +54,10 @@ public:
 				setX += w + 0.01;
 			}
 			enemies.push_back(temp);
+			if(tot == 10)
+			{
+				tot = 3;
+			}
 		}
 	}
 
@@ -63,12 +69,25 @@ public:
 		}
 	}
 
+	void shotcountincrement()
+	{
+		shotcount++;
+		if(shotcount == num_enemies)
+		{
+			for(int i = 0; i < enemies.size(); i++)
+			{
+				//enemies.at(i)->setshotfalse();
+			}
+			shotcount = 0;
+		}
+	}
+
 	bool containsprojectile(Projectile* projectile)
 	{
 		float x1 = projectile->getcornerX();
 		float x2 = projectile->getcornerX() + projectile->getwidth();
-		float y1 = projectile->getcornerY();
-		float y2 = projectile->getcornerY() + projectile->getheight();
+		float y1 = projectile->getcornerY() - 0.05;
+		float y2 = projectile->getcornerY() - projectile->getheight();
 		for(int i = 0; i < enemies.size(); i++)
 		{
 			if(enemies.at(i)->contains(x1,y1) || enemies.at(i)->contains(x2,y2))
@@ -78,6 +97,16 @@ public:
 			}
 		}
 		return false;
+	}
+
+	Enemy* getenemy(int a)
+	{
+		return enemies.at(a);
+	}
+
+	int getnum()
+	{
+		return num_enemies;
 	}
 
 	void draw()
@@ -116,8 +145,7 @@ public:
 		for(int i = 0; i < num_enemies; i++)
 		{
 			enemies.at(i)->setmovement(left,right,down);
-			enemies.at(i)->move();
-		}
+					}
 		top_left_X = enemies.at(0)->getcornerX();
 	}
 

@@ -14,33 +14,35 @@
 
 class TexRect {
 public:
-    float x;
-    float y;
-    float w;
-    float h;
-    GLuint texture_id;
+	float x;
+	float y;
+	float w;
+	float h;
+	GLuint texture_id;
 
 
-    TexRect (const char*, float, float, float, float);
-    
-    void draw();
-    
-    bool contains(float, float);
-    
-    void moveUp(float rate=0.01);
-    void moveDown(float rate=0.01);
-    void moveLeft(float rate=0.01);
-    void moveRight(float rate=0.01);
-	
-	float getY();    
-	
-    void jump();
-    
-    bool rising;
-    bool movingLeft;
-   
-    float xinc;
-    float yinc;
+	TexRect (const char*, float, float, float, float);
+
+	void draw();
+
+	bool contains(float, float);
+
+	void moveUp(float rate=0.01);
+	void moveDown(float rate=0.01);
+	void moveLeft(float rate=0.01);
+	void moveRight(float rate=0.01);
+
+	void setY(float input);
+	void setX(float input);
+
+	float getY();	
+	void jump();
+
+	bool rising;
+	bool movingLeft;
+
+	float xinc;
+	float yinc;
 };
 
 #endif

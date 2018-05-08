@@ -4,6 +4,9 @@
 #include "Projectile.h"
 #include <deque>
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -22,6 +25,29 @@ public:
 		width = w;
 		height = h;
 	}
+
+	void addRandomProjectile(bool upinput, float speed)
+	{
+		if(multiprojectile.size() == 0)
+		{
+			int num = rand() % 7 + 1;
+			int c = rand() % 2 + 1;
+			float posneg;
+			if(c == 2)
+			{
+				posneg = -1;
+			}
+			else
+			{
+				posneg = 1;
+			}
+			float x = (float)(c)/10;
+			x *= posneg;
+			float y = 1.5;
+			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
+			multiprojectile.push_back(projectile);
+		}
+	}	
 
 	void addProjectile(bool upinput, float x, float y, float speed)
 	{
