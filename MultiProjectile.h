@@ -25,9 +25,8 @@ public:
 
 	void addProjectile(bool upinput, float x, float y, float speed)
 	{
-		//cout << "size of projectiles " << multiprojectile.size() << endl;
-			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
-			multiprojectile.push_back(projectile);
+		projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);
+		multiprojectile.push_back(projectile);
 	}
 
 	float projectileX(int a)
@@ -38,6 +37,11 @@ public:
 	float projectileY(int a)
 	{
 		return multiprojectile.at(a)->getcornerY();
+	}
+
+	Projectile* getprojectile(int a)
+	{
+		return multiprojectile.at(a);
 	}
 
 	float poslastprojectile()

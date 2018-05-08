@@ -2,6 +2,7 @@
 #define Army_h
 
 #include "Enemy.h"
+#include "Projectile.h"
 #include <vector>
 #include <iostream>
 
@@ -62,11 +63,15 @@ public:
 		}
 	}
 
-	bool contains(float x, float y)
+	bool containsprojectile(Projectile* projectile)
 	{
+		float x1 = projectile->getcornerX();
+		float x2 = projectile->getcornerX() + projectile->getwidth();
+		float y1 = projectile->getcornerY();
+		float y2 = projectile->getcornerY() + projectile->getheight();
 		for(int i = 0; i < enemies.size(); i++)
 		{
-			if(enemies.at(i)->contains(x,y))
+			if(enemies.at(i)->contains(x1,y1) || enemies.at(i)->contains(x2,y2))
 			{
 				enemies.at(i)->setdeath();
 				return true;

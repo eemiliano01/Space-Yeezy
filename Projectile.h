@@ -46,6 +46,7 @@ public:
 	void setnotmoving()
 	{
 		moving = false;
+		cornerY = 2;
 	}
 
 	void setSpeed(float speed)
@@ -61,6 +62,16 @@ public:
 	float getcornerY()
 	{
 		return cornerY;
+	}
+
+	float getwidth()
+	{
+		return width;
+	}
+
+	float getheight()
+	{
+		return height;
 	}
 
 	void draw()

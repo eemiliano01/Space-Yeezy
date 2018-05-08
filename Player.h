@@ -60,17 +60,6 @@ public:
 		{
 			left = true;
 		}
-		else if(key == 101)
-		{
-			if(shooting == false)
-			{
-				shooting = true;
-			}
-			else if(shooting == true)
-			{
-				shooting = false;
-			}
-		}
 		else if(key == 102)
 		{
 			right = true;
