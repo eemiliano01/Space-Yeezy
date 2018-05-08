@@ -15,16 +15,18 @@ class Screen
 	TexRect* pausemenu;
 	TexRect* gameovermenu;
 	TexRect* winscreen;
-	AnimatedRect* gameover;
+	TexRect* gameover;
+//	AnimatedRect* gameover;
 
 public:
-	Screen(const char* title, const char* pausem, const char* game, const char* winimage, const char* gameanimate)
+	Screen(const char* title, const char* pausem, const char* game, const char* winimage, const char* gameoverimage)
 	{
 		titlemenu = new TexRect(title,-1,1,2,2);
 		pausemenu = new TexRect(pausem,-1,1,2,2);
 		gameovermenu = new TexRect(game,-1,1,2,2);
 		winscreen = new TexRect(winimage,-1,1,2,2);
-		gameover = new AnimatedRect(gameanimate,7,1,-1.0,0.5,2,1.2);
+		//gameover = new AnimatedRect(gameoverimage,7,1,-1.0,0.5,2,1.2);
+		gameover = new TexRect(gameoverimage,-0.5,0.5,1,0.5);
 		win = false;
 		lose = false;
 		pause = false;
@@ -42,7 +44,7 @@ public:
 		{
 			gameovermenu->draw();
 			gameover->draw();
-			gameover->advance();
+	//		gameover->advance();
 		}
 		else if(gamestart)
 		{

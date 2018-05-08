@@ -105,7 +105,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	mx = 0.0;
 	my = 0.0;
 
-	screens = new Screen("images/title_screen.png","images/pause_screen.png","images/game_over.png","images/win_screen.png","images/game_over_animate.png");
+	screens = new Screen("images/title_screen.png","images/pause_screen.png","images/game_over.png","images/win_screen.png","images/endgame.png");
 	background = new TexRect("images/space_square.png", -1, 1, 2, 2);
 	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 10);
 	playerone = new Player("images/Kanye.png", " ", 3, 2, -0.7, -0.8, .15, .2);
