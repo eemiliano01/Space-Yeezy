@@ -128,6 +128,30 @@ public:
 		}
 	}
 
+	void keydownchar(unsigned char key)
+	{
+		if(key == 'a')
+		{
+			left = true;
+		}
+		else if(key == 'd')
+		{
+			right = true;
+		}
+	}
+
+	void keyupchar(unsigned char key)
+	{
+		if(key == 'a')
+		{
+			left = false;
+		}
+		else if(key == 'd')
+		{
+			right = false;
+		}
+	}
+
 	void draw()
 	{
 		if(alive)

@@ -9,6 +9,7 @@
 #include "MultiProjectile.h"
 #include "Yeezys.h"
 #include "Supreme.h"
+#include "Screen.h"
 #include <vector>
 #include <time.h>
 #include <stdlib.h>
@@ -45,13 +46,21 @@ public:
 	MultiProjectile* p1_projectiles;
 	MultiProjectile* p2_projectiles;
 	MultiProjectile* enemy_projectiles;
+	Screen* screens;
 	Yeezys* yeezys;
 	Supreme* supreme;
 	TexRect* background;
 
+	TexRect* mainmenu;
+	TexRect* pausemenu;
+	TexRect* gamever;
+	TexRect* gameoverscr;
+
 	AnimatedRect* gameOver;
 
-	bool game_over;
+	int playercount;
+	bool game_start;
+	bool twoplayer;
 };
 
 #endif
