@@ -7,7 +7,7 @@ static App* game;
 void app_timer(int value)
 {
 	srand(time(NULL));
-	int num = rand() % 5 + 1;
+	int num = rand() % 3 + 1;
 	if(game->game_over)
 	{
 		cout << "game over" << endl;
@@ -30,9 +30,21 @@ void app_timer(int value)
 				game->game_over = true;
 			}
 		}
-		if(num == 3)
+		if(num == 2)
 		{
-			game->enemy_projectiles->addRandomProjectile(false,0.04);
+			game->enemy_projectiles->addRandomProjectile(false,0.05);
+		}
+		//check for num alive
+		if(game->army->getalive() == 0)
+		{
+			game->game_over = true;
+		}
+		for(int i = game->army->getnum() - 1; i >= 0; i--)
+		{
+			if(game->army->getenemy(i)->getcornerY() <= -0.65 && game->army->getenemy(i)->getalive())
+			{
+				game->game_over = true;
+			}
 		}
 		game->yeezys->pickedup(game->playerone->pickedup(game->yeezys));
 		game->supreme->pickedup(game->playerone->pickedup(game->supreme));
@@ -50,8 +62,8 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	my = 0.0;
     
 	background = new TexRect("images/space_square.png", -1, 1, 2, 2);
-	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 8);
-	playerone = new Player("images/Kanye.png", " ", 3, 2, 0.5, -0.8, .15, .20);
+	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 10);
+	playerone = new Player("images/Kanye.png", " ", 3, 2, 0.5, -0.8, .15, .2);
 	p1_projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
 	p2_projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
 	enemy_projectiles = new MultiProjectile("images/thanos_gauntlet.png", 0.0, 0.0, 0.484, 0.640);

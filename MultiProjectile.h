@@ -17,6 +17,7 @@ class MultiProjectile
 	float width;
 	float height;
 	const char* filename;
+	bool alternate;
 
 public:
 	MultiProjectile(const char* filename, float x, float y, float w, float h)
@@ -24,24 +25,30 @@ public:
 		this->filename = filename;
 		width = w;
 		height = h;
+		alternate = false;
 	}
 
 	void addRandomProjectile(bool upinput, float speed)
 	{
 		if(multiprojectile.size() == 0)
 		{
-			int num = rand() % 7 + 1;
-			int c = rand() % 2 + 1;
+			int num = rand() % 12;
 			float posneg;
-			if(c == 2)
+			if(alternate)
 			{
 				posneg = -1;
+				alternate = false;
 			}
 			else
 			{
 				posneg = 1;
+				if(num >= 9)
+				{
+					num -= 4;
+				}
+				alternate = true;
 			}
-			float x = (float)(c)/10;
+			float x = (float)(num)/10;
 			x *= posneg;
 			float y = 1.5;
 			projectile = new Projectile(filename,x,y,width,height,speed,upinput,true);

@@ -90,7 +90,7 @@ public:
 		{
 			srand(time(NULL));
 			int num;
-			num = rand() % 25 + 1;
+			num = rand() % 15 + 1;
 			if(num == 7)
 			{
 				//cout << "spawning supreme" << endl;

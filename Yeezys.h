@@ -90,7 +90,7 @@ public:
 		{
 			srand(time(0));
 			int num;
-			num = rand() % 25 + 1;
+			num = rand() % 15 + 1;
 			if(num == 4)
 			{
 				//cout << "spawning yeezy" << endl;

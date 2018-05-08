@@ -34,6 +34,7 @@ public:
 		this->rows = rows;
 		this->cols = cols;
 		num_enemies = rows * cols;
+		num_alive = rows * cols;
 		right = true;
 		down = false;
 		int j = 1;
@@ -69,19 +70,6 @@ public:
 		}
 	}
 
-	void shotcountincrement()
-	{
-		shotcount++;
-		if(shotcount == num_enemies)
-		{
-			for(int i = 0; i < enemies.size(); i++)
-			{
-				//enemies.at(i)->setshotfalse();
-			}
-			shotcount = 0;
-		}
-	}
-
 	bool containsprojectile(Projectile* projectile)
 	{
 		float x1 = projectile->getcornerX();
@@ -93,6 +81,7 @@ public:
 			if(enemies.at(i)->contains(x1,y1) || enemies.at(i)->contains(x2,y2))
 			{
 				enemies.at(i)->setdeath();
+				num_alive--;
 				return true;
 			}
 		}
@@ -107,6 +96,11 @@ public:
 	int getnum()
 	{
 		return num_enemies;
+	}
+
+	int getalive()
+	{
+		return num_alive;
 	}
 
 	void draw()

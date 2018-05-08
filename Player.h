@@ -3,7 +3,6 @@
 
 #include "TexRect.h"
 #include "AnimatedRect.h"
-#include "Projectile.h"
 #include "Yeezys.h"
 #include "Supreme.h"
 #include <deque>

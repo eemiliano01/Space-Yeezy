@@ -43,12 +43,17 @@ public:
 		shot = false;
 		shootnum = snum;
 		totalchance = tchance;
-		moverate = 0.001;
+		moverate = 0.001; //0.001
 	}
 
 	void setshotfalse()
 	{
 		shot = false;
+	}
+
+	bool getalive()
+	{
+		return alive;
 	}
 
 	float getcornerX()
