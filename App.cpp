@@ -10,7 +10,7 @@ void app_timer(int value)
 	int num = rand() % 5 + 1;
 	if(game->game_over)
 	{
-		//game is over
+		cout << "game over" << endl;
 	}
 	else
 	{
@@ -22,9 +22,17 @@ void app_timer(int value)
 				game->p1_projectiles->setnotmoving(i);
 			}
 		}
+		//check for enemy projectiles hitting player
+		for(int i = 0; i < game->enemy_projectiles->getsize(); i++)
+		{
+			if(game->playerone->shot(game->enemy_projectiles->getprojectile(i)->shotplayer(game->playerone)))
+			{
+				game->game_over = true;
+			}
+		}
 		if(num == 3)
 		{
-			game->enemy_projectiles->addRandomProjectile(false,0.05);
+			game->enemy_projectiles->addRandomProjectile(false,0.04);
 		}
 		game->yeezys->pickedup(game->playerone->pickedup(game->yeezys));
 		game->supreme->pickedup(game->playerone->pickedup(game->supreme));

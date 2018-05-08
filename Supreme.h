@@ -93,7 +93,7 @@ public:
 			num = rand() % 25 + 1;
 			if(num == 7)
 			{
-				cout << "spawning supreme" << endl;
+				//cout << "spawning supreme" << endl;
 				drawn = true;
 				int pos;
 				pos = rand() % 7 + 1;

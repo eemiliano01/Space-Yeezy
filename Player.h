@@ -68,6 +68,16 @@ public:
 		return cornerY;
 	}
 
+	float getwidth()
+	{
+		return width;
+	}
+
+	float getheight()
+	{
+		return height;
+	}
+
 	bool pickedup(Yeezys* yeezy)
 	{
 		float x1, x2, y1, y2;
@@ -147,12 +157,17 @@ public:
 		}
 	}
 
-	void contains(float x, float y)
+	bool shot(bool input)
 	{
-		if(player->contains(x,y))
+		if(input)
 		{
 			alive = false;
 			fading = true;
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 

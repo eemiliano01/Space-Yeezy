@@ -98,7 +98,7 @@ public:
 		for(int i = 0; i < multiprojectile.size(); i++)
 		{
 			//cout << multiprojectile.front()->getcornerY() << endl;
-			if(multiprojectile.front()->getcornerY() - height >= 0.99 || multiprojectile.front()->getcornerY() <= -0.8)
+			if(multiprojectile.front()->getcornerY() - height >= 0.99 || multiprojectile.front()->getcornerY() <= -0.99)
 			{
 				multiprojectile.pop_front();
 			}

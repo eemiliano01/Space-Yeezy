@@ -1,6 +1,9 @@
 #ifndef Projectile_h
 #define Projectile_h
 
+#include "TexRect.h"
+#include "Player.h"
+
 using namespace std;
 
 class Projectile
@@ -40,6 +43,18 @@ public:
 		{
 			up = false;
 			down = true;
+		}
+	}
+
+	bool shotplayer(Player* player)
+	{
+		float x1 = player->getcornerX();
+		float x2 = x1 + player->getwidth();
+		float y1 = player->getcornerY() - 0.5;
+		float y2 = y1 + player->getheight();
+		if(projectile->contains(x1,y1) || projectile->contains(x1,y2) || projectile->contains(x2,y2) || projectile->contains(x2,y1))
+		{
+			return true;
 		}
 	}
 
