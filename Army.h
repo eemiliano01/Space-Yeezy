@@ -27,7 +27,7 @@ class Army
 public:
 	Army(const char* filename1, const char* filename2, int anirows, int anicols, float x, float y, float w, float h, int rows, int cols)
 	{
-		troop = new Enemy(filename1,filename2,anirows,anicols,x,y,w,h,0,0);
+		troop = new Enemy(filename1,filename2,anirows,anicols,x,y,w,h);
 		top_left_X = x;
 		top_right_X = top_left_X + cols * w;
 		top_Y = y;
@@ -44,7 +44,7 @@ public:
 		int tot = 3;
 		for(int i = 1; i <= num_enemies; i++)
 		{
-			temp = new Enemy(filename1,filename2,anirows,anicols,setX,setY,w,h,tot-2,tot);
+			temp = new Enemy(filename1,filename2,anirows,anicols,setX,setY,w,h);
 			if(i % cols == 0)
 			{
 				setX = x;
@@ -55,10 +55,6 @@ public:
 				setX += w + 0.01;
 			}
 			enemies.push_back(temp);
-			if(tot == 10)
-			{
-				tot = 3;
-			}
 		}
 	}
 

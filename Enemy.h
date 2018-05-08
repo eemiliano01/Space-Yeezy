@@ -17,8 +17,6 @@ class Enemy
 	bool shot;
 	int rows;
 	int cols;
-	int shootnum;
-	int totalchance;
 	float cornerX;
 	float cornerY;
 	float width;
@@ -28,7 +26,7 @@ class Enemy
 	AnimatedRect *enemyfade;
 
 public:
-	Enemy(const char* filename1, const char* filename2, int rows, int cols, float x, float y, float w, float h, int snum, int tchance)
+	Enemy(const char* filename1, const char* filename2, int rows, int cols, float x, float y, float w, float h)
 	{
 		enemy = new TexRect(filename1, x, y, w, h);
 		enemyfade = new AnimatedRect(filename2, rows, cols, x, y, w, h);
@@ -41,8 +39,6 @@ public:
 		alive = true;
 		fading = false;
 		shot = false;
-		shootnum = snum;
-		totalchance = tchance;
 		moverate = 0.005; //0.001
 	}
 
@@ -143,24 +139,6 @@ public:
 		}
 	}
 
-	bool shoot()
-	{
-		if(shot == false && alive == true)
-		{
-			srand(time(NULL));
-			int num;
-			num = rand() % totalchance + 1;
-			if(num == shootnum)
-			{
-				shot = true;
-			}
-			return num == 5;
-		}
-		else
-		{
-			return false;
-		}
-	}
 };
 
 #endif

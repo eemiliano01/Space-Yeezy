@@ -36,7 +36,7 @@ void app_timer(int value)
 		{
 			if(game->playerone->shot(game->enemy_projectiles->getprojectile(i)->shotplayer(game->playerone)))
 			{
-				cout << "p1 playercount " << game->playercount << endl;
+				//cout << "p1 playercount " << game->playercount << endl;
 				game->playercount--;
 				if(game->playercount == 0)
 				{
@@ -60,7 +60,7 @@ void app_timer(int value)
 			{
 				if(game->playertwo->shot(game->enemy_projectiles->getprojectile(i)->shotplayer(game->playertwo)))
 				{
-					cout << "p2 playercount " << game->playercount << endl;
+					//cout << "p2 playercount " << game->playercount << endl;
 					game->playercount--;
 					if(game->playercount == 0)
 					{
@@ -230,7 +230,8 @@ void App::keyPress(unsigned char key)
 	{
 		if(screens->getshow())
 		{
-			screens = new Screen("images/title_screen.png","images/pause_screen.png","images/game_over.png","images/win_screen.png","images/game_over_animate.png");
+			screens->setstart();
+			//screens = new Screen("images/title_screen.png","images/pause_screen.png","images/game_over.png","images/win_screen.png","images/game_over_animate.png");
 			army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 10);
 			playerone = new Player("images/Kanye.png", " ", 3, 2, -0.7, -0.8, .15, .2);
 			playertwo = new Player("images/donald_trump.png", " ", 3, 2, 0.5, -0.8, .15, .2);

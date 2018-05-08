@@ -13,7 +13,6 @@ class Player
 	bool fading;
 	bool left;
 	bool right;
-	bool shooting;
 	int rows;
 	int cols;
 	int projectile_count;
@@ -36,7 +35,6 @@ public:
 		projectile_count = 0;
 		left = false;
 		right = false;
-		shooting = false;
 		cornerX = x;
 		cornerY = y;
 		width = w;
@@ -198,11 +196,6 @@ public:
 		{
 			return false;
 		}
-	}
-
-	bool getshooting()
-	{
-		return shooting;
 	}
 	
 	~Player()
