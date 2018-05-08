@@ -36,6 +36,7 @@ void app_timer(int value)
 		{
 			if(game->playerone->shot(game->enemy_projectiles->getprojectile(i)->shotplayer(game->playerone)))
 			{
+				cout << "p1 playercount " << game->playercount << endl;
 				game->playercount--;
 				if(game->playercount == 0)
 				{
@@ -59,6 +60,7 @@ void app_timer(int value)
 			{
 				if(game->playertwo->shot(game->enemy_projectiles->getprojectile(i)->shotplayer(game->playertwo)))
 				{
+					cout << "p2 playercount " << game->playercount << endl;
 					game->playercount--;
 					if(game->playercount == 0)
 					{
@@ -102,7 +104,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	game = this;
 	mx = 0.0;
 	my = 0.0;
-    
+
 	screens = new Screen("images/title_screen.png","images/pause_screen.png","images/game_over.png","images/win_screen.png","images/game_over_animate.png");
 	background = new TexRect("images/space_square.png", -1, 1, 2, 2);
 	army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 10);
@@ -116,7 +118,6 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	game_start = false;
 	twoplayer = false;
 	app_timer(1);
-
 }
 
 void App::specialKeyPress(int key)
@@ -233,6 +234,8 @@ void App::keyPress(unsigned char key)
 			army = new Army("images/thanos_face.png","images/thanos_face_fade.png", 3, 2, -0.9, 0.95, .14, .20, 4, 10);
 			playerone = new Player("images/Kanye.png", " ", 3, 2, -0.7, -0.8, .15, .2);
 			playertwo = new Player("images/donald_trump.png", " ", 3, 2, 0.5, -0.8, .15, .2);
+			p1_projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
+			p2_projectiles = new MultiProjectile("images/money.png", 0.0, 0.0, 0.0477, 0.114);
 			enemy_projectiles = new MultiProjectile("images/thanos_gauntlet.png", 0.0, 0.0, 0.484, 0.640);
 			game_start = false;
 			twoplayer = false;
@@ -245,6 +248,7 @@ void App::keyPress(unsigned char key)
 		twoplayer = false;
 		game_start = true;
 		screens->setshowfalse();
+		app_timer(1);
 	}
 	else if(key == '2')
 	{
@@ -252,6 +256,7 @@ void App::keyPress(unsigned char key)
 		twoplayer = true;
 		game_start = true;
 		screens->setshowfalse();
+		app_timer(1);
 	}
 	else
 	{

@@ -87,7 +87,9 @@ public:
 		if(player->contains(x1,y1) || player->contains(x1,y2) || player->contains(x2,y2) || player->contains(x1,y2))
 		{
 			moverate += 0.02;
+			return true;
 		}
+		return false;
 	}
 
 	bool pickedup(Supreme* supreme)
@@ -101,7 +103,9 @@ public:
 		{
 			boost += 0.02;
 			projectile_count++;
+			return true;
 		}
+		return false;
 	}
 
 	void keydown(int key)
@@ -184,6 +188,8 @@ public:
 	{
 		if(input)
 		{
+			cornerX = 2;
+			player->moveLeft(2);
 			alive = false;
 			fading = true;
 			return true;
